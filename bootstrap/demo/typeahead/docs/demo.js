@@ -7,7 +7,7 @@ var demo = {};
 demo.controller = function() {
   this.countries = m.request({
     method: 'GET',
-    url: '/countries.json'
+    url: 'countries.json'
   });
   this.selectedItem = m.prop(undefined);
   this.typeahead = m.u.init(m.ui.typeahead({
@@ -53,7 +53,7 @@ demo.doc = m("div", [
   ])
 ]);
 demo.files = {
-  'demo.jsx': "// START\r\nvar demo = {};\r\ndemo.controller = function() {\r\n  this.countries = m.request({\r\n    method: 'GET',\r\n    url: '/countries.json'\r\n  });\r\n  this.selectedItem = m.prop(undefined);\r\n  this.typeahead = m.u.init(m.ui.typeahead({\r\n    list: this.countries,\r\n    onselect: this.selectedItem,\r\n    label: function(item) {\r\n      return item.name;\r\n    },\r\n    template: function(item) {\r\n      return <div>\r\n        <img src={item.flag}/>&nbsp;\r\n        {item.name}\r\n      </div>;\r\n    }\r\n  }));\r\n};\r\n\r\ndemo.view = function(ctrl) {\r\n  return INCLUDE('./template');\r\n};\r\n// END\r\n\r\ndemo.doc =  INCLUDE('./readme');\r\ndemo.files = {\r\n  'demo.jsx': CONTENT('./demo.jsx'),\r\n  '_template.jsx': CONTENT('./_template.jsx'),\r\n};\r\nmodule.exports = demo;\r\n",
+  'demo.jsx': "// START\r\nvar demo = {};\r\ndemo.controller = function() {\r\n  this.countries = m.request({\r\n    method: 'GET',\r\n    url: 'countries.json'\r\n  });\r\n  this.selectedItem = m.prop(undefined);\r\n  this.typeahead = m.u.init(m.ui.typeahead({\r\n    list: this.countries,\r\n    onselect: this.selectedItem,\r\n    label: function(item) {\r\n      return item.name;\r\n    },\r\n    template: function(item) {\r\n      return <div>\r\n        <img src={item.flag}/>&nbsp;\r\n        {item.name}\r\n      </div>;\r\n    }\r\n  }));\r\n};\r\n\r\ndemo.view = function(ctrl) {\r\n  return INCLUDE('./template');\r\n};\r\n// END\r\n\r\ndemo.doc =  INCLUDE('./readme');\r\ndemo.files = {\r\n  'demo.jsx': CONTENT('./demo.jsx'),\r\n  '_template.jsx': CONTENT('./_template.jsx'),\r\n};\r\nmodule.exports = demo;\r\n",
   '_template.jsx': "<div>\r\n  {ctrl.typeahead.$view()}<br/>\r\n  <pre>\r\n    Selected: {JSON.stringify(ctrl.selectedItem(), null, '  ')}\r\n  </pre>\r\n</div>\r\n",
 };
 module.exports = demo;
