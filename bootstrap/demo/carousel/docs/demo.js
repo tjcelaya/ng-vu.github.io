@@ -19,8 +19,8 @@ demo.doc = m("div", [
   m("p", ["Carousel is a Mithril component"])
 ]);
 demo.files = {
-  'demo.jsx': "// START\r\nvar demo = {};\r\ndemo.controller = function() {\r\n  this.carousel = m.u.init(m.ui.carousel());\r\n};\r\n\r\ndemo.view = function(ctrl) {\r\n  return INCLUDE('./template');\r\n};\r\n// END\r\n\r\ndemo.doc =  INCLUDE('./readme');\r\ndemo.files = {\r\n  'demo.jsx': CONTENT('./demo.jsx'),\r\n  '_template.jsx': CONTENT('./_template.jsx'),\r\n};\r\nmodule.exports = demo;\r\n",
-  '_template.jsx': "<div>\r\n  {ctrl.carousel.$view()}\r\n</div>\r\n",
+  'demo.jsx': "// START\nvar demo = {};\ndemo.controller = function() {\n  this.carousel = m.u.init(m.ui.carousel());\n};\n\ndemo.view = function(ctrl) {\n  return INCLUDE('./template');\n};\n// END\n\ndemo.doc =  INCLUDE('./readme');\ndemo.files = {\n  'demo.jsx': CONTENT('./demo.jsx'),\n  '_template.jsx': CONTENT('./_template.jsx'),\n};\nmodule.exports = demo;\n",
+  '_template.jsx': "<div>\n  {ctrl.carousel.$view()}\n</div>\n",
 };
 module.exports = demo;
 }); // carousel/docs/demo

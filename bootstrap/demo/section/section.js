@@ -16,7 +16,18 @@ define('section/section', function(require, module, exports) {
 var tabs = require('section/tabs');
 var code = require('section/code');
 
+var start = '// START';
+var end = '// END';
+var r = new RegExp(start + '([\\s\\S]*?)' + end);
+
 module.exports = function(config) {
+
+  function extract(v) {
+    v = v.replace(/\/\*\* \@jsx m \*\//g, '')
+      .replace(/\n[\t ]*\n[\t ]*\n/g, '\n\n');
+    var matches = r.exec(v);
+    return matches ? matches[1].trim() : v;
+  }
 
   function controller() {
     var codes = [];
@@ -24,7 +35,7 @@ module.exports = function(config) {
       codes.push({
         class: 'code',
         label: name,
-        module: code(config.files[name])
+        module: code(extract(config.files[name]))
       });
     }
 
@@ -42,7 +53,7 @@ module.exports = function(config) {
         this.tabs2 = m.u.init(tabs([{
           class: 'code',
           label: 'Compiled JS',
-          module: code(data)
+          module: code(extract(data))
         }]));
       }.bind(this));
   }
@@ -53,7 +64,7 @@ module.exports = function(config) {
     }, [
       m("h1", [
         config.title, " ",
-        m("small", ["(", config.id, ")"])
+        m("small", ["(", config.small, ")"])
       ]),
       m("div", {
         class: "row"

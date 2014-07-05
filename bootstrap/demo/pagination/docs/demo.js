@@ -73,6 +73,10 @@ demo.view = function(ctrl) {
 
 demo.doc = m("div", [
   m("p", ["Pagination is a Mithril component that takes care of paging."]),
+  m("h2", {
+    id: "usage"
+  }, ["Usage"]),
+  m("p", [m("code", ["m.ui.pagination(settings)"])]),
   m("h3", {
     id: "settings"
   }, ["Settings"]),
@@ -96,8 +100,9 @@ demo.doc = m("div", [
     m("li", [m("p", [m("code", ["setPage(page)"]), ": Set current page."])])
   ])
 ]);
+demo.small = 'm.ui.pagination';
 demo.files = {
-  'demo.jsx': "// START\r\nvar demo = {};\r\ndemo.controller = function() {\r\n  this.countries = m.request({\r\n    method: 'GET',\r\n    url: 'countries.json'\r\n  });\r\n  this.totalItems = function() {\r\n    return this.countries()? this.countries().length : 0;\r\n  }.bind(this);\r\n\r\n  this.currentPage = m.prop(0);\r\n  this.itemsPerPage = m.prop(5);\r\n  this.maxSize = 7;\r\n  this.directionLinks = true;\r\n  this.boundaryLinks = true;\r\n  this.previousText = '<';\r\n  this.nextText = '>';\r\n\r\n  this.pagination = m.u.init(m.ui.pagination(this));\r\n};\r\n\r\ndemo.view = function(ctrl) {\r\n  var size = ctrl.itemsPerPage();\r\n  var page = ctrl.currentPage();\r\n  var rows = ctrl.countries()\r\n    .slice(size*page, size*(page+1))\r\n    .map(function(item, i) {\r\n      return <tr>\r\n        <td>{size*page + i + 1}</td>\r\n        <td><img src={item.flag}/>&nbsp;{item.name}</td>\r\n      </tr>;\r\n    });\r\n\r\n  return INCLUDE('./template');\r\n};\r\n// END\r\n\r\ndemo.doc =  INCLUDE('./readme');\r\ndemo.files = {\r\n  'demo.jsx': CONTENT('./demo.jsx'),\r\n  '_template.jsx': CONTENT('./_template.jsx'),\r\n};\r\nmodule.exports = demo;\r\n",
+  'demo.jsx': "// START\r\nvar demo = {};\r\ndemo.controller = function() {\r\n  this.countries = m.request({\r\n    method: 'GET',\r\n    url: 'countries.json'\r\n  });\r\n  this.totalItems = function() {\r\n    return this.countries()? this.countries().length : 0;\r\n  }.bind(this);\r\n\r\n  this.currentPage = m.prop(0);\r\n  this.itemsPerPage = m.prop(5);\r\n  this.maxSize = 7;\r\n  this.directionLinks = true;\r\n  this.boundaryLinks = true;\r\n  this.previousText = '<';\r\n  this.nextText = '>';\r\n\r\n  this.pagination = m.u.init(m.ui.pagination(this));\r\n};\r\n\r\ndemo.view = function(ctrl) {\r\n  var size = ctrl.itemsPerPage();\r\n  var page = ctrl.currentPage();\r\n  var rows = ctrl.countries()\r\n    .slice(size*page, size*(page+1))\r\n    .map(function(item, i) {\r\n      return <tr>\r\n        <td>{size*page + i + 1}</td>\r\n        <td><img src={item.flag}/>&nbsp;{item.name}</td>\r\n      </tr>;\r\n    });\r\n\r\n  return INCLUDE('./template');\r\n};\r\n// END\r\n\r\ndemo.doc =  INCLUDE('./readme');\r\ndemo.small = 'm.ui.pagination';\r\ndemo.files = {\r\n  'demo.jsx': CONTENT('./demo.jsx'),\r\n  '_template.jsx': CONTENT('./_template.jsx'),\r\n};\r\nmodule.exports = demo;\r\n",
   '_template.jsx': "<div>\r\n  <pre>\r\n    Total: {ctrl.totalItems()}<br/>\r\n    Page: {page}/{ctrl.pagination.numPages()} (zero-based)\r\n  </pre>\r\n  <div>{ctrl.pagination.$view()}</div>\r\n  <button class=\"btn btn-info\"\r\n    onclick={function(){ ctrl.pagination.setPage(10); }}>\r\n    Go to page 10\r\n  </button>\r\n  <table class=\"table\">\r\n    <thead>\r\n      <tr>\r\n        <th class=\"#\">#</th>\r\n        <th>Country</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      {rows}\r\n    </tbody>\r\n  </table>\r\n</div>\r\n",
 };
 module.exports = demo;

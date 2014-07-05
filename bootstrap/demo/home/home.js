@@ -5,11 +5,8 @@ define('home/home', function(require, module, exports) {
 var section = require('section/section');
 var config = require('config');
 
-// var components = ['pagination', 'datepicker'];
-
 var sections = config.components.map(function(name) {
   var demo = require(name + '/docs/demo');
-  demo.id = 'm.ui.' + name;
   demo.name = name;
   demo.title = name[0].toUpperCase() + name.slice(1);
   demo.compiledUrl = 'demo/' + name + '/docs/demo.js';
@@ -27,6 +24,24 @@ exports.view = function(ctrl) {
   return m("div", {
     class: "demo"
   }, [
+    m("section", [
+      m("h1", ["Introduction"]),
+      m("h2", ["Getting Started"]),
+      m("p", [
+        "Download ", m("a", {
+          href: "https://github.com/ng-vu/mithril-bootstrap/blob/master/dist/mithril-bootstrap.js"
+        }, ["mithril-bootstrap"]), " and include after ", m("a", {
+          href: "http://lhorie.github.io/mithril/"
+        }, ["mithril.js"]), " script."
+      ]),
+      m("h2", ["Contributing"]),
+      m("p", [
+        "Read ", m("a", {
+          href: "https://github.com/ng-vu/mithril-bootstrap/blob/master/contributing-guide.md"
+        }, ["contributing-guide.md"]), "."
+      ])
+    ]),
+
     sectionsView
   ]);
 };
